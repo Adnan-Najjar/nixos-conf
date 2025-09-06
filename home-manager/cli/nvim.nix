@@ -39,15 +39,13 @@
       nvim-lspconfig
       nvim-treesitter.withAllGrammars
       markview-nvim
-      vim-illuminate
       nvim-web-devicons
       gitsigns-nvim
       vim-sleuth
       tokyonight-nvim
       lualine-nvim
-      mini-pick
       mini-files
-      undotree
+      snacks-nvim
     ];
     extraLuaConfig = builtins.readFile ./nvim.lua;
   };

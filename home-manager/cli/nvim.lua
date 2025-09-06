@@ -34,19 +34,19 @@ local tab_keybinds = {
 	["<A-a>"] = ":tabnew<CR>",
 	["<A-n>"] = ":tabnext<CR>",
 }
-
 -- Manage tabs in normal and terminal mode
 for key, cmd in pairs(tab_keybinds) do
 	vim.keymap.set("n", key, cmd, { noremap = true, silent = true })
 	vim.keymap.set("t", key, "<C-\\><C-n>" .. cmd, { noremap = true, silent = true })
 end
+
 -- Window management
 vim.keymap.set("n", "<C-h>", "<c-w><c-h>")
 vim.keymap.set("n", "<C-l>", "<c-w><c-l>")
 vim.keymap.set("n", "<C-j>", "<c-w><c-j>")
 vim.keymap.set("n", "<C-k>", "<c-w><c-k>")
 vim.keymap.set("n", "<C-w>S", ":vert sball<cr>", { desc = "Split all buffers" })
-vim.keymap.set("n", "<C-w>T", ":tab sball<cr>", { desc = "Tab all splits" })
+-- vim.keymap.set("n", "<C-w>T", ":tab sball<cr>", { desc = "Tab all splits" })
 
 -- Quality of Life
 vim.cmd([[
@@ -85,10 +85,6 @@ vim.cmd.colorscheme("tokyonight-night")
 vim.cmd([[ highlight Normal ctermbg=none guibg=none ]])
 -- Lualine
 require('lualine').setup()
--- Picker
-require("mini.pick").setup()
-vim.keymap.set("n", "<leader>f", ":Pick files<CR>")
-vim.keymap.set("n", "<leader>b", ":Pick buffers<CR>")
 -- File explorer
 require("mini.files").setup({
 	mappings = {
@@ -103,43 +99,55 @@ require("mini.files").setup({
 })
 vim.keymap.set("n", "<leader>e", function() require("mini.files").open(vim.api.nvim_buf_get_name(0), true) end)
 vim.keymap.set("n", "<leader>E", ":Open .<CR>")
--- Undotree
-vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
--- Toggle Terminal
-local term_buf = nil
-local term_win = nil
-vim.keymap.set({ "n", "t" }, "<C-\\>", function()
-	if term_win and vim.api.nvim_win_is_valid(term_win) then
-		if vim.api.nvim_get_current_win() == term_win then
-			vim.cmd.hide()
-		else
-			vim.api.nvim_set_current_win(term_win)
-			vim.cmd.startinsert()
-		end
-		return
-	end
-	if term_buf and vim.api.nvim_buf_is_valid(term_buf) then
-		vim.cmd.split()
-		vim.cmd.wincmd("J")
-		vim.api.nvim_win_set_height(0, 10)
-		vim.api.nvim_win_set_buf(0, term_buf)
-		term_win = vim.api.nvim_get_current_win()
-		vim.cmd.startinsert()
-		return
-	end
-	vim.cmd.split()
-	vim.cmd.term()
-	vim.cmd.wincmd("J")
-	vim.api.nvim_buf_set_name(0, "Toggle Terminal")
-	vim.api.nvim_win_set_height(0, 10)
-	term_win = vim.api.nvim_get_current_win()
-	term_buf = vim.api.nvim_get_current_buf()
-	vim.fn.chansend(vim.b.terminal_job_id, "clear\n")
-	vim.cmd.startinsert()
+-- Snacks
+require('snacks').setup {
+	bigfile = { enabled = true },
+	quickfile = { enabled = true },
+	picker = { enabled = true },
+	notifier = { enabled = true },
+	scope = { enabled = true },
+	words = { enabled = true },
+	indent = { enabled = true },
+	scroll = { enabled = true },
+	terminal = {
+		win = {
+			keys = {
+				term_normal = {
+					"<esc>",
+					function() vim.cmd("stopinsert") end,
+					mode = "t",
+					desc = "Single escape to normal mode",
+				},
+			},
+			wo = { winbar = "" },
+		},
+	},
+	image = { enabled = true },
+}
+-- Picker
+vim.keymap.set("n", "<leader>p", function() Snacks.picker.zoxide({ layout = { preset = "vscode" } }) end)
+vim.keymap.set("n", "<leader><space>", function() Snacks.picker.smart() end)
+vim.keymap.set("n", "<leader>g", function() Snacks.picker.grep() end)
+vim.keymap.set("n", "<leader>b", function() Snacks.picker.buffers() end)
+-- All pickers
+vim.keymap.set("n", "<leader>a", function() Snacks.picker.pickers() end)
+-- Undo history
+vim.keymap.set("n", "<leader>u", function() Snacks.picker.undo() end)
+-- Git
+vim.keymap.set("n", "<leader>gs", function() Snacks.picker.git_status() end)
+vim.keymap.set("n", "<leader>gb", function() Snacks.git.blame_line() end)
+-- Open current file in Github
+vim.keymap.set("n", "<leader>gh", function() Snacks.gitbrowse() end)
+-- Terminal
+vim.keymap.set({ "n", "t" }, "<C-Space>", function()
+	local term = Snacks.terminal
+	term.toggle()
+	vim.api.nvim_buf_set_name(term.get().buf, " Terminal")
 end)
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
-vim.cmd("highlight! link NormalNC Normal")
-
+-- Diagnostics toggle
+Snacks.toggle.diagnostics():map("<leader>h")
+-- Zen mode toggle
+Snacks.toggle.zen():map("<leader>z")
 -- LSP setup
 vim.diagnostic.config({
 	virtual_text = true,
@@ -184,7 +192,6 @@ cmp.setup {
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
-		{ name = 'supermaven' },
 	}, {
 		{ name = 'buffer' },
 	})
@@ -192,13 +199,3 @@ cmp.setup {
 -- LSP keymaps
 vim.keymap.set("n", "<leader>l", vim.lsp.buf.format)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
--- Disable LSP errors on keybind
-local isLspDiagnosticsVisible = true
-vim.keymap.set("n", "<leader>h", function()
-	isLspDiagnosticsVisible = not isLspDiagnosticsVisible
-	vim.diagnostic.config({
-		virtual_text = isLspDiagnosticsVisible,
-		underline = isLspDiagnosticsVisible,
-		signs = true,
-	})
-end)

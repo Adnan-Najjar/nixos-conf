@@ -11,6 +11,9 @@
     [
       unzip
       ripgrep
+      fd
+      imagemagick
+      jq
       btop
       fastfetch
       eza
@@ -51,6 +54,7 @@
       extraConfig = ''
         set -ag terminal-overrides ",$TERM:Tc"
         set-option -g status-style bg=default
+        set -gq allow-passthrough on
       '';
     };
 
