@@ -1,4 +1,9 @@
-{ config, pkgs, user, ... }:
+{
+  config,
+  pkgs,
+  user,
+  ...
+}:
 {
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -44,6 +49,7 @@
   programs = {
     zsh.enable = true;
     gnupg.agent = {
+      pinentryPackage = pkgs.pinentry-gtk2;
       enable = true;
       enableSSHSupport = true;
       settings = {
