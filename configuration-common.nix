@@ -47,7 +47,15 @@
 
   # Enable Programs
   programs = {
+    nix-ld.enable = true;
     zsh.enable = true;
+
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
+
     gnupg.agent = {
       pinentryPackage = pkgs.pinentry-gtk2;
       enable = true;
@@ -58,6 +66,7 @@
         max-cache-ttl = 60480000;
       };
     };
+
   };
 
   # List services that you want to enable:

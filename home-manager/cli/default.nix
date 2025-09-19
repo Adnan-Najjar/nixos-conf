@@ -14,9 +14,12 @@
       fd
       imagemagick
       jq
+      htmlq
       btop
       fastfetch
       eza
+      file
+      xxd
       tldr
       trash-cli
       gemini-cli

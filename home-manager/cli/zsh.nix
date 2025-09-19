@@ -1,6 +1,7 @@
 {
   config,
   isWSL,
+  isAndroid,
   lib,
   ...
 }:
@@ -46,8 +47,14 @@
         cpy = lib.mkForce "win32yank.exe -i";
         nrs = lib.mkForce "sudo nixos-rebuild switch --flake /etc/nixos#wsl";
         open = lib.mkForce "explorer.exe";
-      })        
-    ];          
+      })
+      (lib.mkIf isAndroid {
+        pst = lib.mkForce "termux-clipboard-get";
+        cpy = lib.mkForce "termux-clipboard-set";
+        open = lib.mkForce "am start --user 0 -a android.intent.action.VIEW -d";
+        nrs = lib.mkForce "nix-on-droid switch --flake ~/.config/nixpkgs#android";
+      })
+    ];
 
     initContent = ''
       # Completion cache path setup

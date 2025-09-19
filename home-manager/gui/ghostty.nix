@@ -5,6 +5,7 @@
     clearDefaultKeybinds = true;
     settings = {
       theme = "tokyonight";
+      bold-is-bright = true;
       font-family = "CaskaydiaMono Nerd Font";
       font-size = 16;
       mouse-hide-while-typing = true;

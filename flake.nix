@@ -12,6 +12,10 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -20,6 +24,7 @@
       nixos-wsl,
       home-manager,
       zen-browser,
+      nix-on-droid,
       ...
     }@inputs:
     let
@@ -64,6 +69,7 @@
                 ++ [ ./home-manager/gui ];
               home-manager.extraSpecialArgs = homeManager.home-manager.extraSpecialArgs // {
                 isWSL = false;
+                isAndroid = false;
               };
             }
           ];
@@ -85,9 +91,26 @@
             {
               home-manager.extraSpecialArgs = homeManager.home-manager.extraSpecialArgs // {
                 isWSL = true;
+                isAndroid = false;
               };
             }
 
+          ];
+        };
+
+        andriod = nix-on-droid.lib.nixOnDroidConfiguration {
+          pkgs = import nixpkgs { system = "aarch64-linux"; };
+          modules = [
+            ./android.nix
+            {
+              home-manager.config = {
+                home.stateVersion = "24.05";
+              };
+              home-manager.extraSpecialArgs = homeManager.home-manager.extraSpecialArgs // {
+                isWSL = false;
+                isAndroid = true;
+              };
+            }
           ];
         };
 
