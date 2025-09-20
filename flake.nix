@@ -64,6 +64,7 @@
                 ++ [ ./home-manager/gui ];
               home-manager.extraSpecialArgs = homeManager.home-manager.extraSpecialArgs // {
                 isWSL = false;
+                isHM = false;
               };
             }
           ];
@@ -85,12 +86,38 @@
             {
               home-manager.extraSpecialArgs = homeManager.home-manager.extraSpecialArgs // {
                 isWSL = true;
+                isHM = false;
               };
             }
 
           ];
         };
 
+      };
+
+      homeConfigurations.hm = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = system;
+          config = {
+            allowUnfree = true;
+            experimental-features = [
+              "nix-command"
+              "flakes"
+            ];
+          };
+        };
+        modules = [
+          ./home-manager
+          {
+            home.username = user.username;
+            home.homeDirectory = "/home/${user.username}";
+          }
+        ];
+        extraSpecialArgs = {
+          inherit user inputs;
+          isWSL = false;
+          isHM = true;
+        };
       };
     };
 }

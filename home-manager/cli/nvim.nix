@@ -11,6 +11,7 @@
       gopls
       # Bash
       bash-language-server
+      shfmt
       # Nix
       nil
       nixfmt-classic
@@ -20,6 +21,9 @@
       # Python
       python3
       pyright
+      black
+      # Mermaid
+      mermaid-cli
     ]
   );
 
