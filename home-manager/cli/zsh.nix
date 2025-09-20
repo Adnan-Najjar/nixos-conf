@@ -1,6 +1,7 @@
 {
   config,
   isWSL,
+  isHM,
   lib,
   ...
 }:
@@ -24,19 +25,16 @@
       {
         cat = "bat";
         ip = "ip -c";
-        cp = "cp -i";
-        mv = "mv -i";
         rm = "trash -v";
         mkdir = "mkdir -p";
         pst = "wl-paste";
         cpy = "wl-copy";
         urls = "grep -oP -N --color=never 'http[s]?://\\S+'";
-        ppt2txt = "unzip -qc \"$1\" \"ppt/slides/slide*.xml\" | grep -oP '(?<=\\<a:t\\>).*?(?=\\</a:t\\>)'";
         ".." = "cd ..";
-        ls = "eza --icons";
-        la = "eza -a --icons";
-        ll = "eza -l --icons --total-size";
-        lt = "eza --icons --tree -I .git --group-directories-first";
+        ls = "eza --icons=auto";
+        la = "eza -a --icons=auto";
+        ll = "eza -l --icons=auto --total-size";
+        lt = "eza --icons=auto --tree -I .git --group-directories-first";
         nrs = "sudo nixos-rebuild switch --flake /etc/nixos#os";
         gemini = "GEMINI_API_KEY=$(pass api/gemini) gemini";
         open = "xdg-open &>/dev/null &; disown";
@@ -46,8 +44,11 @@
         cpy = lib.mkForce "win32yank.exe -i";
         nrs = lib.mkForce "sudo nixos-rebuild switch --flake /etc/nixos#wsl";
         open = lib.mkForce "explorer.exe";
-      })        
-    ];          
+      })
+      (lib.mkIf isHM {
+        nrs = lib.mkForce "nix run home-manager -- switch --flake $HOME/.config/home-manager#hm";
+      })
+    ];
 
     initContent = ''
       # Completion cache path setup
@@ -64,19 +65,28 @@
       bindkey ' ' magic-space                           # do history expansion on space
       bindkey '^[[1;5C' forward-word                    # ctrl + ->
       bindkey '^[[1;5D' backward-word                   # ctrl + <-
+      autoload -U edit-command-line
+      zle -N edit-command-line
       bindkey '^X' edit-command-line                    # ctrl + x to open in editor
       # Override -h and --help with bat
       alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
       alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 
-      # Dont open tmux in tty or ssh
-      if [[ $(tty) == *"pts"* ]]; then
-              if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-                      tmux attach -t main &> /dev/null || tmux new -s main &> /dev/null 
-              fi
-      fi
+      # If not running interactively, don't do anything
+      case $- in
+          *i*) ;;
+            *) return;;
+      esac
 
       clear; fastfetch -c examples/9.jsonc
+
+      if ! [ $TMUX ] && ! [ $NVIM ]; then
+          dir=$(zoxide query -i) 2>/dev/null
+          session_name=$(basename "$dir" | tr ' .-' '___' | cut -c1-7)
+          if [ -n "$dir" ]; then
+              tmux new-session -A -s "$session_name" -c "$dir"
+          fi
+      fi
     '';
   };
 

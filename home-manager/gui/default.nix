@@ -2,7 +2,6 @@
 {
   imports = [
     ./ghostty.nix
-    ./obsidian.nix
     ./zen-browser.nix
     ./gnome
   ];

@@ -13,7 +13,10 @@
       ripgrep
       fd
       imagemagick
+      ghostscript_headless # PDF
+      python313Packages.markitdown # MD
       jq
+      htmlq
       btop
       fastfetch
       eza
@@ -39,6 +42,10 @@
       enable = true;
       enableZshIntegration = true;
       options = [ "--cmd cd" ];
+    };
+    carapace = {
+      enable = true;
+      enableZshIntegration = true;
     };
     fzf = {
       enable = true;
@@ -71,6 +78,7 @@
         color.ui = true;
         credential.helper = "store";
       };
+      ignores = [ "shell.nix" ];
     };
     gh.enable = true;
 

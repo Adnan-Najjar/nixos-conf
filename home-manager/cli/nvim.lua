@@ -46,7 +46,6 @@ vim.keymap.set("n", "<C-l>", "<c-w><c-l>")
 vim.keymap.set("n", "<C-j>", "<c-w><c-j>")
 vim.keymap.set("n", "<C-k>", "<c-w><c-k>")
 vim.keymap.set("n", "<C-w>S", ":vert sball<cr>", { desc = "Split all buffers" })
--- vim.keymap.set("n", "<C-w>T", ":tab sball<cr>", { desc = "Tab all splits" })
 
 -- Quality of Life
 vim.cmd([[
@@ -58,7 +57,7 @@ vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv")
 vim.keymap.set({ "n", "v" }, "<leader>d", [[d]])
 vim.keymap.set({ "n", "v" }, "d", [["_d]])
--- vim.keymap.set("x", "p", [["_dP]])
+vim.keymap.set("x", "p", [["_dP]])
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- Highlight when copying text
@@ -125,9 +124,8 @@ require('snacks').setup {
 	image = { enabled = true },
 }
 -- Picker
-vim.keymap.set("n", "<leader>p", function() Snacks.picker.zoxide({ layout = { preset = "vscode" } }) end)
-vim.keymap.set("n", "<leader><space>", function() Snacks.picker.smart() end)
-vim.keymap.set("n", "<leader>g", function() Snacks.picker.grep() end)
+vim.keymap.set("n", "<leader><space>", function() Snacks.picker.zoxide({ layout = { preset = "vscode" } }) end)
+vim.keymap.set("n", "<leader>/", function() Snacks.picker.grep() end)
 vim.keymap.set("n", "<leader>b", function() Snacks.picker.buffers() end)
 -- All pickers
 vim.keymap.set("n", "<leader>a", function() Snacks.picker.pickers() end)
