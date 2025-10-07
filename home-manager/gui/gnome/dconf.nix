@@ -5,7 +5,9 @@ with lib.hm.gvariant;
 
 {
   dconf.settings = {
-    "org/gnome/mutter" = { dynamic-workspaces = false; };
+    "org/gnome/mutter" = {
+      dynamic-workspaces = false;
+    };
 
     # Screen blanks after 15 minutes
     "org/gnome/desktop/session" = {
@@ -20,8 +22,20 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/input-sources" = {
-      sources = [ (mkTuple [ "xkb" "us" ]) (mkTuple [ "xkb" "ara" ]) ];
-      xkb-options = [ "caps:escape" "grp:alt_shift_toggle" ];
+      sources = [
+        (mkTuple [
+          "xkb"
+          "us"
+        ])
+        (mkTuple [
+          "xkb"
+          "ara"
+        ])
+      ];
+      xkb-options = [
+        "caps:escape"
+        "grp:alt_shift_toggle"
+      ];
     };
 
     "org/gnome/desktop/interface" = {
@@ -85,20 +99,17 @@ with lib.hm.gvariant;
       www = [ "<Super>b" ];
     };
 
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" =
-      {
-        binding = "<Super>Return";
-        command = "ghostty";
-        name = "Terminal";
-      };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+      binding = "<Super>Return";
+      command = "ghostty";
+      name = "Terminal";
+    };
 
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" =
-      {
-        binding = "<Shift><Super>e";
-        command = ''
-          bash -c "gnome-screenshot -a -f /tmp/screenshot.png && tesseract /tmp/screenshot.png - | wl-copy"'';
-        name = "Extract Image from Text";
-      };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+      binding = "<Shift><Super>e";
+      command = ''bash -c "gnome-screenshot -a -f /tmp/screenshot.png && tesseract /tmp/screenshot.png - | wl-copy"'';
+      name = "Extract Image from Text";
+    };
 
     "org/gnome/shell" = {
       enabled-extensions = [
@@ -120,9 +131,13 @@ with lib.hm.gvariant;
       ];
     };
 
-    "org/gnome/shell/weather" = { automatic-location = true; };
+    "org/gnome/shell/weather" = {
+      automatic-location = true;
+    };
 
-    "org/gnome/shell/app-switcher" = { current-workspace-only = true; };
+    "org/gnome/shell/app-switcher" = {
+      current-workspace-only = true;
+    };
 
     "org/gnome/shell/keybindings" = {
       screenshot = [ "Print" ];
@@ -141,7 +156,9 @@ with lib.hm.gvariant;
       toggle-overview = [ "<super>tab" ];
     };
 
-    "org/gnome/desktop/sound" = { event-sounds = false; };
+    "org/gnome/desktop/sound" = {
+      event-sounds = false;
+    };
 
     "org/gnome/shell/extensions/dash-in-panel" = {
       button-margin = 2;
@@ -167,7 +184,9 @@ with lib.hm.gvariant;
       show-activities-button = true;
     };
 
-    "org/gnome/shell/extensions/user-theme" = { name = "${themeName}"; };
+    "org/gnome/shell/extensions/user-theme" = {
+      name = "${themeName}";
+    };
 
     "org/gnome/shell/extensions/clipboard-indicator" = {
       clear-history = [ ];
@@ -194,8 +213,10 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell/extensions/auto-move-windows" = {
-      application-list =
-        [ "zen-beta.desktop:2" "com.mitchellh.ghostty.desktop:1" ];
+      application-list = [
+        "zen-beta.desktop:2"
+        "com.mitchellh.ghostty.desktop:1"
+      ];
     };
 
   };

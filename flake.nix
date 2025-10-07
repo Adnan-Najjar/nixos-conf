@@ -56,8 +56,8 @@
           modules = [
             ./configuration.nix
             ./configuration-common.nix
-	    ./hardware-configuration.nix
-	    nixos-hardware.nixosModules.asus-zephyrus-ga401
+            ./hardware-configuration.nix
+            nixos-hardware.nixosModules.asus-zephyrus-ga401
             home-manager.nixosModules.home-manager
             homeManager
             {
