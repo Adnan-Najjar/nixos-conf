@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -17,6 +18,7 @@
   outputs =
     {
       nixpkgs,
+      nixos-hardware,
       nixos-wsl,
       home-manager,
       zen-browser,
@@ -54,7 +56,8 @@
           modules = [
             ./configuration.nix
             ./configuration-common.nix
-            ./hardware-configuration.nix
+	    ./hardware-configuration.nix
+	    nixos-hardware.nixosModules.asus-zephyrus-ga401
             home-manager.nixosModules.home-manager
             homeManager
             {
