@@ -78,7 +78,7 @@
           (extension "haramblur" "info@haramblur.com")
           (extension "simple-translate" "simple-translate@sienori")
           (extension "proton-vpn-firefox-extension" "vpn@proton.ch")
-          (extension "pssff" "passff@invicem.pro")
+          (extension "passff" "passff@invicem.pro")
         ];
     };
   };

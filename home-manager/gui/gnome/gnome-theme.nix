@@ -1,7 +1,7 @@
 { theme, themeName, ... }:
 
 {
-  home.gtk = {
+  gtk = {
     enable = true;
     gtk3.theme = {
       name = themeName;

@@ -6,7 +6,7 @@
     settings = {
       theme = "tokyonight";
       font-family = "CaskaydiaMono Nerd Font";
-      font-size = 16;
+      font-size = 15;
       mouse-hide-while-typing = true;
       background-blur-radius = 20;
       background-opacity = 0.9;

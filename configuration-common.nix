@@ -31,18 +31,12 @@
     };
   };
 
-  # Define a user account.
-  users = {
-    mutableUsers = false;
-    users.${user.username} = {
-      hashedPassword = user.password;
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.${user.username} = {
       isNormalUser = true;
       description = "${user.fullName}";
-      extraGroups = [
-        "wheel"
-      ];
+      extraGroups = [ "networkmanager" "wheel" ];
       shell = pkgs.zsh;
-    };
   };
 
   # Enable Programs

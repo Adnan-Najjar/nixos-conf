@@ -1,4 +1,4 @@
-{ config, inputs, pkgs, user, ... }:
+{ config, inputs, pkgs, lib, user, ... }:
 
 # if errors we may need to add lib to the gnome-theme inherit
 let
@@ -7,11 +7,10 @@ let
 in {
   imports = [
     (import ./gnome-theme.nix { inherit theme themeName; })
-    ./dconf.nix
+    (import ./dconf.nix { inherit theme themeName lib; })
   ];
 
   home = {
-    homeDirectory = "/home/${user.username}}";
     packages = (with pkgs.gnomeExtensions; [
       arcmenu
       caffeine
@@ -29,7 +28,7 @@ in {
     # Setup wallpaper
     file = {
       "${config.home.homeDirectory}/Pictures/wallpaper.png".source =
-        ./gnome/wallpaper.png;
+        ./wallpaper.png;
     };
 
   };
