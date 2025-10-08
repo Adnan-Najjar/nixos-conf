@@ -55,6 +55,7 @@
           specialArgs = { inherit user inputs; };
           modules = [
             ./configuration.nix
+            ./virtualization.nix
             ./configuration-common.nix
             ./hardware-configuration.nix
             nixos-hardware.nixosModules.asus-zephyrus-ga401
