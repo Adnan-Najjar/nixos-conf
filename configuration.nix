@@ -36,8 +36,29 @@
     defaultLocale = "en_US.UTF-8";
   };
 
-  # Enable the GNOME Desktop Environment.
+  # Enable GDM and add wallpaper
   services.displayManager.gdm.enable = true;
+  nixpkgs.overlays = [
+    (final: prev: {
+      gnome-shell = prev.gnome-shell.overrideAttrs (old: {
+        patches = (old.patches or [ ]) ++ [
+          (builtins.toFile "gdm-background.patch" ''
+            --- a/data/theme/gnome-shell-sass/widgets/_login-lock.scss
+            +++ b/data/theme/gnome-shell-sass/widgets/_login-lock.scss
+            @@ -15,4 +15,6 @@
+             /* Login Dialog */
+             .login-dialog {
+               background-color: $_gdm_bg;
+            +  background-image: url('file:///etc/nixos/home-manager/gui/gnome/lockscreen.png');
+            +  background-repeat: no-repeat;
+             }
+          '')
+        ];
+      });
+    })
+  ];
+
+  # Enable the GNOME Desktop Environment.
   services.desktopManager.gnome.enable = true;
   environment.gnome.excludePackages = (
     with pkgs;
