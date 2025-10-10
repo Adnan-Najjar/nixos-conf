@@ -4,6 +4,7 @@
   imports = [
     ./nvim.nix
     ./zsh.nix
+    ./autosave.nix
   ];
 
   home.packages = (
