@@ -118,6 +118,7 @@
     wl-clipboard
     chromium
     onlyoffice-desktopeditors
+    libnotify
   ];
 
   fonts = {
@@ -129,9 +130,12 @@
     packages = [ pkgs.nerd-fonts.caskaydia-cove ];
   };
 
-  programs.kdeconnect = {
-    enable = true;
-    package = pkgs.gnomeExtensions.gsconnect;
+  programs = {
+    steam.enable = true;
+    kdeconnect = {
+      enable = true;
+      package = pkgs.gnomeExtensions.gsconnect;
+    };
   };
 
   # List services that you want to enable:
