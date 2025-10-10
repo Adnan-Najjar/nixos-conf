@@ -129,6 +129,11 @@
     packages = [ pkgs.nerd-fonts.caskaydia-cove ];
   };
 
+  programs.kdeconnect = {
+    enable = true;
+    package = pkgs.gnomeExtensions.gsconnect;
+  };
+
   # List services that you want to enable:
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;

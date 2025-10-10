@@ -123,11 +123,12 @@ with lib.hm.gvariant;
         "wifiqrcode@glerro.pm.me"
         "athan@goodm4ven"
         "auto-move-windows@gnome-shell-extensions.gcampax.github.com"
+        "gsconnect@andyholmes.github.io"
       ];
       favorite-apps = [
+        "com.mitchellh.ghostty.desktop"
         "zen-beta.desktop"
         "org.gnome.Nautilus.desktop"
-        "com.mitchellh.ghostty.desktop"
       ];
     };
 

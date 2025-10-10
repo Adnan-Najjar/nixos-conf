@@ -11,6 +11,7 @@
     [
       man-pages
       man-pages-posix
+      file
       unzip
       ripgrep
       fd

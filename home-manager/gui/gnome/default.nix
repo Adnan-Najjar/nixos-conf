@@ -32,7 +32,6 @@ in
         user-themes
         wifi-qrcode
         auto-move-windows
-        grand-theft-focus
       ]
     );
 
