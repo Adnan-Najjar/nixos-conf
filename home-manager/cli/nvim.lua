@@ -67,6 +67,21 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
+-- Folding
+-- Auto folding configuration for markdown / other languages
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "*", -- or limit to specific types
+	callback = function()
+		local parsers = require("nvim-treesitter.parsers")
+		if parsers.has_parser() then
+			vim.wo.foldmethod = "expr"
+			vim.wo.foldexpr   = "nvim_treesitter#foldexpr()"
+		else
+			vim.wo.foldmethod = "syntax"
+		end
+		vim.wo.foldlevel = 1
+	end,
+})
 
 -- Gitsgins
 require('gitsigns').setup {

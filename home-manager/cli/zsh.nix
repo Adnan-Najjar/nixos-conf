@@ -37,7 +37,7 @@
         lt = "eza --icons=auto --tree -I .git --group-directories-first";
         nrs = "sudo nixos-rebuild switch --flake /etc/nixos#os";
         gemini = "GEMINI_API_KEY=$(pass api/gemini) gemini";
-        open = "xdg-open &>/dev/null &; disown";
+        open = "xdg-open";
       }
       (lib.mkIf isWSL {
         pst = lib.mkForce "win32yank.exe -o";

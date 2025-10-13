@@ -43,6 +43,7 @@
       nvim-lspconfig
       nvim-treesitter.withAllGrammars
       markview-nvim
+      markdown-preview-nvim
       nvim-web-devicons
       gitsigns-nvim
       vim-sleuth
