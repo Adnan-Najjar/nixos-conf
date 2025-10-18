@@ -50,7 +50,7 @@
              .login-dialog {
                background-color: $_gdm_bg;
             +  background-image: url('file:///etc/nixos/home-manager/gui/gnome/lockscreen.png');
-            +  background-repeat: no-repeat;
+            +  background-repeat: repeat;
              }
           '')
         ];

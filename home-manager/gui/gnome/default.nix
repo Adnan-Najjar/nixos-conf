@@ -3,11 +3,9 @@
   inputs,
   pkgs,
   lib,
-  user,
   ...
 }:
 
-# if errors we may need to add lib to the gnome-theme inherit
 let
   theme = pkgs.sweet;
   themeName = "Sweet-Ambar-Blue-Dark-v40";

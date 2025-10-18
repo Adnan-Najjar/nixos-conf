@@ -19,6 +19,7 @@
       imagemagick
       ghostscript_headless # PDF
       python313Packages.markitdown # MD
+      ffmpeg
       jq
       htmlq
       btop

@@ -14,6 +14,9 @@
       keybind = [
         "ctrl+shift+v=paste_from_clipboard"
         "ctrl+shift+c=copy_to_clipboard"
+        "ctrl+equal=reset_font_size"
+        "ctrl+shift+plus=increase_font_size:1.0"
+        "ctrl+minus=decrease_font_size:1.0"
       ];
     };
   };

@@ -70,7 +70,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- Folding
 -- Auto folding configuration for markdown / other languages
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "*", -- or limit to specific types
+	pattern = "*",
 	callback = function()
 		local parsers = require("nvim-treesitter.parsers")
 		if parsers.has_parser() then
@@ -79,7 +79,8 @@ vim.api.nvim_create_autocmd("FileType", {
 		else
 			vim.wo.foldmethod = "syntax"
 		end
-		vim.wo.foldlevel = 1
+		vim.wo.foldlevel = 99
+		vim.wo.foldenable = true
 	end,
 })
 
@@ -186,6 +187,8 @@ lspconfig.lua_ls.setup { capabilities = capabilities }
 lspconfig.gopls.setup { capabilities = capabilities }
 lspconfig.pyright.setup { capabilities = capabilities }
 lspconfig.nil_ls.setup { capabilities = capabilities }
+lspconfig.ts_ls.setup { capabilities = capabilities }
+lspconfig.eslint.setup { capabilities = capabilities }
 
 local cmp = require('cmp')
 local luasnip = require('luasnip')

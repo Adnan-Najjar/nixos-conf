@@ -24,6 +24,10 @@
       black
       # Mermaid
       mermaid-cli
+      # NodeJS
+      nodejs
+      eslint
+      typescript-language-server
     ]
   );
 
