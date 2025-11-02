@@ -60,32 +60,26 @@
 
       WORDCHARS=''${WORDCHARS//\/} # Don't consider '/' character part of the word
 
-      # configure key keybindings
+      # Configure key keybindings
       bindkey -e                                        # emacs key bindings
       bindkey ' ' magic-space                           # do history expansion on space
       bindkey '^[[1;5C' forward-word                    # ctrl + ->
       bindkey '^[[1;5D' backward-word                   # ctrl + <-
+
+      # Open command in editor
       autoload -U edit-command-line
       zle -N edit-command-line
-      bindkey '^X' edit-command-line                    # ctrl + x to open in editor
+      bindkey '^X' edit-command-line                    # ctrl + x
+
       # Override -h and --help with bat
       alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
       alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 
-      # If not running interactively, don't do anything
-      case $- in
-          *i*) ;;
-            *) return;;
-      esac
-
-      clear; fastfetch -c examples/9.jsonc
-
-      if ! [ $TMUX ] && ! [ $NVIM ]; then
-          dir=$(zoxide query -i) 2>/dev/null
-          session_name=$(basename "$dir" | tr ' .-' '___' | cut -c1-7)
-          if [ -n "$dir" ]; then
-              tmux new-session -A -s "$session_name" -c "$dir"
-          fi
+      if ! [ $NVIM ]; then
+        clear; fastfetch -c examples/9.jsonc
+        if ! [ $TMUX ]; then
+          ${./tmux-sessionizer.sh}
+        fi
       fi
     '';
   };

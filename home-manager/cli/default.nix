@@ -14,8 +14,10 @@
       man-pages-posix
       file
       unzip
+      p7zip
       ripgrep
       fd
+      android-tools
       imagemagick
       ghostscript_headless # PDF
       python313Packages.markitdown # MD
@@ -67,6 +69,7 @@
         set -ag terminal-overrides ",$TERM:Tc"
         set-option -g status-style bg=default
         set -gq allow-passthrough on
+        bind-key a display-popup -E -w 50% -h 40% -x C -y C "${./tmux-sessionizer.sh}" 
       '';
     };
 

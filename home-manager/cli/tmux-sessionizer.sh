@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+selected=$(zoxide query -i)
+if [[ -z "$selected" ]]; then
+    exit 0
+fi
+session_name=$(basename "$selected" | tr . _)
+
+if ! tmux list-sessions | grep -q "^$session_name:"; then
+    tmux new-session -ds "$session_name" -c "$selected"
+    tmux send-keys -t 0:0.0 'cd ~/Gemini && gemini --approval-mode "auto_edit" --telemetry false' Enter
+fi
+
+if [[ -z $TMUX ]]; then
+    tmux attach-session -t "$session_name"
+else
+    tmux switch-client -t "$session_name"
+fi
