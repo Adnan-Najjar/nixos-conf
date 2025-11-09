@@ -5,6 +5,7 @@
     ./nvim.nix
     ./zsh.nix
     ./autosave.nix
+    ./opencode.nix
   ];
 
   home.packages = (
@@ -29,7 +30,7 @@
       eza
       tldr
       trash-cli
-      gemini-cli
+      fahclient
     ]
   );
 
@@ -58,6 +59,11 @@
       enable = true;
       enableZshIntegration = true;
     };
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
     tmux = {
       enable = true;
       prefix = "C-s";
@@ -69,7 +75,7 @@
         set -ag terminal-overrides ",$TERM:Tc"
         set-option -g status-style bg=default
         set -gq allow-passthrough on
-        bind-key a display-popup -E -w 50% -h 40% -x C -y C "${./tmux-sessionizer.sh}" 
+        bind-key a display-popup -E -w 50% -h 40% -x C -y C "${./tmux-sessionizer.sh}"
       '';
     };
 
@@ -79,14 +85,20 @@
       userName = user.fullName;
       userEmail = user.email;
       aliases = {
-        prettylog = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
+        pl = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
+        ol = "log --oneline --graph --decorate";
       };
       extraConfig = {
         init.defaultBranch = "main";
         color.ui = true;
         credential.helper = "store";
+        pull.rebase = true;
       };
-      ignores = [ "shell.nix" ];
+      ignores = [
+        "AGENTS.md"
+        ".env"
+        "*.log"
+      ];
     };
     gh.enable = true;
 

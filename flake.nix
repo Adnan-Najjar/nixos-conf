@@ -31,16 +31,15 @@
         username = "adnan";
         fullName = "Adnan Najjar";
         email = "adnan.najjar1@gmail.com";
-        password = "$6$uRBlD/dWnsMHsLMJ$Q1PoJOfq1.wAFiqBS78wC69VVZpbPFirZzPa3BrOMEBSr6RyK2hMEp6XZ7Dya3bOPbnIEzl2JvfhZbMRMdRdY1";
       };
+
+      baseImports = [ ./home-manager ];
 
       homeManager = {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.backupFileExtension = "backup";
-        home-manager.users.${user.username}.imports = [
-          ./home-manager
-        ];
+        home-manager.users.${user.username}.imports = baseImports;
         home-manager.extraSpecialArgs = {
           inherit user inputs;
         };
@@ -62,9 +61,7 @@
             home-manager.nixosModules.home-manager
             homeManager
             {
-              home-manager.users.${user.username}.imports =
-                homeManager.home-manager.users.${user.username}.imports
-                ++ [ ./home-manager/gui ];
+              home-manager.users.${user.username}.imports = baseImports ++ [ ./home-manager/gui ];
               home-manager.extraSpecialArgs = homeManager.home-manager.extraSpecialArgs // {
                 isWSL = false;
                 isHM = false;

@@ -99,7 +99,7 @@ require("tokyonight").setup()
 vim.cmd.colorscheme("tokyonight-night")
 vim.cmd([[ highlight Normal ctermbg=none guibg=none ]])
 -- Lualine
-require('lualine').setup()
+require("lualine").setup()
 -- File explorer
 require("mini.files").setup({
 	mappings = {
@@ -116,6 +116,7 @@ vim.keymap.set("n", "<leader>e", function() require("mini.files").open(vim.api.n
 vim.keymap.set("n", "<leader>E", ":Open .<CR>")
 -- Snacks
 require('snacks').setup {
+	input = { enabled = true },
 	bigfile = { enabled = true },
 	quickfile = { enabled = true },
 	picker = { enabled = true },
@@ -215,3 +216,5 @@ cmp.setup {
 -- LSP keymaps
 vim.keymap.set("n", "<leader>l", vim.lsp.buf.format)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)

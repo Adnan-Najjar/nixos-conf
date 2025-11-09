@@ -44,6 +44,7 @@
 
   # Enable Programs
   programs = {
+    nix-ld.enable = true;
     zsh.enable = true;
     gnupg.agent = {
       pinentryPackage = pkgs.pinentry-gtk2;

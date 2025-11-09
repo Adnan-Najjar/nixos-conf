@@ -17,21 +17,20 @@ in
   ];
 
   home = {
-    packages = (
-      with pkgs.gnomeExtensions;
-      [
+    packages =
+      with pkgs;
+      [ gnome-screenshot ]
+      ++ (with gnomeExtensions; [
         arcmenu
         caffeine
         blur-my-shell
         dash-in-panel
         clipboard-indicator
         appindicator
-        athantimes
         user-themes
         wifi-qrcode
         auto-move-windows
-      ]
-    );
+      ]);
 
     # Setup wallpaper
     file = {

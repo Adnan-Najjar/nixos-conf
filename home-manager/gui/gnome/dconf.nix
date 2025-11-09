@@ -95,8 +95,10 @@ with lib.hm.gvariant;
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
       ];
       home = [ "<Super>e" ];
-      magnifier = [ "<Alt><Super>z" ];
+      magnifier = [ "<Super>z" ];
       www = [ "<Super>b" ];
+      mic-mute = [ "KP_Subtract" ];
+      volume-mute = [ "KP_Add" ];
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
@@ -121,7 +123,6 @@ with lib.hm.gvariant;
         "caffeine@patapon.info"
         "blur-my-shell@aunetx"
         "wifiqrcode@glerro.pm.me"
-        "athan@goodm4ven"
         "auto-move-windows@gnome-shell-extensions.gcampax.github.com"
         "gsconnect@andyholmes.github.io"
       ];
@@ -205,12 +206,6 @@ with lib.hm.gvariant;
       private-mode-binding = [ ];
       strip-text = true;
       toggle-menu = [ ];
-    };
-
-    "org/gnome/shell/extensions/athan" = {
-      calculation-method = 1;
-      time-format-12 = true;
-      timezone = 0;
     };
 
     "org/gnome/shell/extensions/auto-move-windows" = {
