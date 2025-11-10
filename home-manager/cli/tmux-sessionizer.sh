@@ -8,7 +8,6 @@ session_name=$(basename "$selected" | tr . _)
 
 if ! tmux list-sessions | grep -q "^$session_name:"; then
     tmux new-session -ds "$session_name" -c "$selected"
-    tmux send-keys -t "0:0.0" 'opencode $HOME/Documents' Enter
 fi
 tmux new-window -t "$session_name":0 -c "$selected"
 tmux send-keys -t "$session_name":0 'opencode .' Enter

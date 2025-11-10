@@ -5,7 +5,7 @@
     ./nvim.nix
     ./zsh.nix
     ./autosave.nix
-    ./opencode.nix
+    ./opencode
   ];
 
   home.packages = (
