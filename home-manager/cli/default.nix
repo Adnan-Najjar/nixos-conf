@@ -75,6 +75,9 @@
         set -ag terminal-overrides ",$TERM:Tc"
         set-option -g status-style bg=default
         set -gq allow-passthrough on
+        set -g base-index 1
+        setw -g pane-base-index 1
+        set-option -g renumber-windows on
         bind-key a display-popup -E -w 50% -h 40% -x C -y C "${./tmux-sessionizer.sh}"
       '';
     };

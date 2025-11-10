@@ -115,11 +115,22 @@ require("mini.files").setup({
 vim.keymap.set("n", "<leader>e", function() require("mini.files").open(vim.api.nvim_buf_get_name(0), true) end)
 vim.keymap.set("n", "<leader>E", ":Open .<CR>")
 -- Snacks
+-- Make picker preview wider
+local layouts = require("snacks.picker.config.layouts")
+layouts["wider_preview"] = vim.tbl_deep_extend("force", layouts["default"], {
+	layout = {
+		box    = "horizontal",
+		width  = 0.9,
+		height = 0.8,
+		{ win = "list",    width = 0.3 },
+		{ win = "preview", width = 0.7 },
+	},
+})
 require('snacks').setup {
 	input = { enabled = true },
 	bigfile = { enabled = true },
 	quickfile = { enabled = true },
-	picker = { enabled = true },
+	picker = { enabled = true, layout = { preset = "wider_preview" } },
 	notifier = { enabled = true },
 	scope = { enabled = true },
 	words = { enabled = true },
@@ -149,7 +160,7 @@ vim.keymap.set("n", "<leader>a", function() Snacks.picker.pickers() end)
 -- Undo history
 vim.keymap.set("n", "<leader>u", function() Snacks.picker.undo() end)
 -- Git
-vim.keymap.set("n", "<leader>gs", function() Snacks.picker.git_status() end)
+vim.keymap.set("n", "<leader>gd", function() Snacks.picker.git_diff() end)
 vim.keymap.set("n", "<leader>gb", function() Snacks.git.blame_line() end)
 -- Open current file in Github
 vim.keymap.set("n", "<leader>gh", function() Snacks.gitbrowse() end)

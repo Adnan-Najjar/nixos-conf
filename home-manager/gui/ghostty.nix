@@ -2,7 +2,6 @@
 {
   programs.ghostty = {
     enable = true;
-    clearDefaultKeybinds = true;
     settings = {
       theme = "tokyonight";
       font-family = "CaskaydiaMono Nerd Font";
@@ -12,11 +11,10 @@
       background-opacity = 0.9;
       maximize = true;
       keybind = [
-        "ctrl+shift+v=paste_from_clipboard"
-        "ctrl+shift+c=copy_to_clipboard"
-        "ctrl+equal=reset_font_size"
-        "ctrl+shift+plus=increase_font_size:1.0"
-        "ctrl+minus=decrease_font_size:1.0"
+        "alt+one=unbind"
+        "alt+two=unbind"
+        "alt+three=unbind"
+        "alt+four=unbind"
       ];
     };
   };

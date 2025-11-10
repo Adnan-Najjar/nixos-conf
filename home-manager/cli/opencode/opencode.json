@@ -10,7 +10,10 @@
       "models": {
         "qwen3:0.6b": {
           "tools": true
-        }
+        },
+        "freehuntx/qwen3-coder:8b": {
+          "tools": true
+        },
       }
     }
   }
