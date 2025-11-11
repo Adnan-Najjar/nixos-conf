@@ -73,11 +73,19 @@
       sensibleOnTop = true;
       extraConfig = ''
         set -ag terminal-overrides ",$TERM:Tc"
-        set-option -g status-style bg=default
         set -gq allow-passthrough on
         set -g base-index 1
         setw -g pane-base-index 1
         set-option -g renumber-windows on
+
+        set -g status-style fg=#62a0ea 
+        set -g status-left "#[fg=#ffbe6f,bold] #S "
+        set -g status-left-length 100
+        set -g window-status-format "#I:#W"
+        set -g window-status-current-format "#[fg=#ffbe6f,bold]#I:#W "
+        set -g status-right '#(tmux ls -F " ##S" | grep -v "$(tmux display -p "#{session_name}")" | tr "\\n" " " | sed "s/ $//" )'
+        set -g status-justify absolute-centre
+
         bind-key a display-popup -E -w 50% -h 40% -x C -y C "${./tmux-sessionizer.sh}"
       '';
     };
