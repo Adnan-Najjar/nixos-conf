@@ -61,4 +61,17 @@
   # List services that you want to enable:
   # services.openssh.enable = true;
   services.fcron.enable = true;
+
+  systemd.services.gopray = {
+    description = "GoPray";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      WorkingDirectory = "/home/adnan/Projects/GoPray";
+      ExecStart = "/home/adnan/Projects/GoPray/gopray";
+      Restart = "on-failure";
+      User = "adnan";
+      Group = "users";
+    };
+  };
 }
