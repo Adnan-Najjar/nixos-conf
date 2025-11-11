@@ -85,13 +85,15 @@
     # Git and Github CLI
     git = {
       enable = true;
-      userName = user.fullName;
-      userEmail = user.email;
-      aliases = {
-        pl = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
-        ol = "log --oneline --graph --decorate";
-      };
-      extraConfig = {
+      settings = {
+        user = {
+          name = user.fullName;
+          email = user.email;
+        };
+        alias = {
+          pl = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
+          ol = "log --oneline --graph --decorate";
+        };
         init.defaultBranch = "main";
         color.ui = true;
         credential.helper = "store";

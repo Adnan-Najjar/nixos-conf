@@ -192,15 +192,12 @@ require("nvim-treesitter.configs").setup {
 	indent = { enable = true },
 }
 -- LSP completion setup
-local lspconfig = require('lspconfig')
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-lspconfig.lua_ls.setup { capabilities = capabilities }
-lspconfig.gopls.setup { capabilities = capabilities }
-lspconfig.pyright.setup { capabilities = capabilities }
-lspconfig.nil_ls.setup { capabilities = capabilities }
-lspconfig.ts_ls.setup { capabilities = capabilities }
-lspconfig.eslint.setup { capabilities = capabilities }
+vim.lsp.enable('lua_ls')
+vim.lsp.enable('gopls')
+vim.lsp.enable('pyright')
+vim.lsp.enable('nil_ls')
+vim.lsp.enable('tsserver')
+vim.lsp.enable('eslint')
 
 local cmp = require('cmp')
 local luasnip = require('luasnip')
@@ -213,9 +210,9 @@ cmp.setup {
 	},
 	mapping = cmp.mapping.preset.insert({
 		['<C-Space>'] = cmp.mapping.complete(),
-		['<CR>'] = cmp.mapping.confirm({ select = true }),
-		['<Tab>'] = cmp.mapping.select_next_item(),
-		['<S-Tab>'] = cmp.mapping.select_prev_item(),
+		['<Tab>'] = cmp.mapping.confirm({ select = true }),
+		['<C-n>'] = cmp.mapping.select_next_item(),
+		['<C-p>'] = cmp.mapping.select_prev_item(),
 	}),
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },

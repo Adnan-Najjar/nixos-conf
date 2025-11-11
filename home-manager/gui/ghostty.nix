@@ -3,7 +3,7 @@
   programs.ghostty = {
     enable = true;
     settings = {
-      theme = "tokyonight";
+      theme = "TokyoNight";
       font-family = "CaskaydiaMono Nerd Font";
       font-size = 15;
       mouse-hide-while-typing = true;
