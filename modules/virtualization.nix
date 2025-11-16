@@ -31,14 +31,4 @@
   systemd.tmpfiles.rules = [
     "L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware"
   ];
-
-  # Virt-manager settings
-  home-manager.users.${user.username} = {
-    dconf.settings = {
-      "org/virt-manager/virt-manager/connections" = {
-        autoconnect = [ "qemu:///system" ];
-        uris = [ "qemu:///system" ];
-      };
-    };
-  };
 }

@@ -27,97 +27,33 @@
     let
       system = "x86_64-linux";
       user = {
-        hostname = "nixos";
         username = "adnan";
         fullName = "Adnan Najjar";
         email = "adnan.najjar1@gmail.com";
-      };
-
-      baseImports = [ ./home-manager ];
-
-      homeManager = {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.backupFileExtension = "backup";
-        home-manager.users.${user.username}.imports = baseImports;
-        home-manager.extraSpecialArgs = {
-          inherit user inputs;
-        };
       };
 
     in
     {
       nixosConfigurations = {
 
-        os = nixpkgs.lib.nixosSystem {
+        # NixOS
+        nixos = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit user inputs; };
           modules = [
-            ./configuration.nix
-            ./virtualization.nix
-            ./configuration-common.nix
-            ./hardware-configuration.nix
-            nixos-hardware.nixosModules.asus-zephyrus-ga401
-            home-manager.nixosModules.home-manager
-            homeManager
-            {
-              home-manager.users.${user.username}.imports = baseImports ++ [ ./home-manager/gui ];
-              home-manager.extraSpecialArgs = homeManager.home-manager.extraSpecialArgs // {
-                isWSL = false;
-                isHM = false;
-              };
-            }
+            ./hosts/nixos.nix
           ];
         };
 
-        wsl = nixpkgs.lib.nixosSystem {
+        # Windows WSL
+        wix = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit user inputs; };
           modules = [
-            ./configuration-common.nix
-            nixos-wsl.nixosModules.default
-            {
-              system.stateVersion = "25.05";
-              wsl.enable = true;
-              wsl.defaultUser = user.username;
-            }
-            home-manager.nixosModules.home-manager
-            homeManager
-            {
-              home-manager.extraSpecialArgs = homeManager.home-manager.extraSpecialArgs // {
-                isWSL = true;
-                isHM = false;
-              };
-            }
-
+            ./hosts/wix.nix
           ];
         };
 
-      };
-
-      homeConfigurations.hm = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = system;
-          config = {
-            allowUnfree = true;
-            experimental-features = [
-              "nix-command"
-              "flakes"
-            ];
-          };
-        };
-        modules = [
-          ./home-manager
-          {
-            home.username = user.username;
-            home.homeDirectory = "/home/${user.username}";
-          }
-        ];
-        extraSpecialArgs = {
-          inherit user inputs;
-          isWSL = false;
-          isHM = true;
-        };
       };
     };
 }

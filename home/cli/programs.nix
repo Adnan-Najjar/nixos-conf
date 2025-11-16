@@ -1,39 +1,6 @@
 { pkgs, user, ... }:
+
 {
-
-  imports = [
-    ./nvim.nix
-    ./zsh.nix
-    ./autosave.nix
-    ./opencode
-  ];
-
-  home.packages = (
-    with pkgs;
-    [
-      man-pages
-      man-pages-posix
-      file
-      unzip
-      p7zip
-      ripgrep
-      fd
-      android-tools
-      imagemagick
-      ghostscript_headless # PDF
-      python313Packages.markitdown # MD
-      ffmpeg
-      jq
-      htmlq
-      btop
-      fastfetch
-      eza
-      tldr
-      trash-cli
-      fahclient
-    ]
-  );
-
   programs = {
     bat = {
       enable = true;
@@ -126,6 +93,5 @@
       ];
     };
     password-store.enable = true;
-
   };
 }

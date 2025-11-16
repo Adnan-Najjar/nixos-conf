@@ -1,7 +1,6 @@
 {
   config,
   isWSL,
-  isHM,
   lib,
   ...
 }:
@@ -35,18 +34,14 @@
         la = "eza -a --icons=auto";
         ll = "eza -l --icons=auto --total-size";
         lt = "eza --icons=auto --tree -I .git --group-directories-first";
-        nrs = "sudo nixos-rebuild switch --flake /etc/nixos#os";
+        nrs = "sudo nixos-rebuild switch --flake /etc/nixos";
         gemini = "GEMINI_API_KEY=$(pass api/gemini) gemini";
         open = "xdg-open";
       }
       (lib.mkIf isWSL {
         pst = lib.mkForce "win32yank.exe -o";
         cpy = lib.mkForce "win32yank.exe -i";
-        nrs = lib.mkForce "sudo nixos-rebuild switch --flake /etc/nixos#wsl";
         open = lib.mkForce "explorer.exe";
-      })
-      (lib.mkIf isHM {
-        nrs = lib.mkForce "nix run home-manager -- switch --flake $HOME/.config/home-manager#hm";
       })
     ];
 
@@ -85,3 +80,4 @@
   };
 
 }
+

@@ -9,10 +9,7 @@
         "baseURL": "http://localhost:11434/v1"
       },
       "models": {
-        "qwen3:0.6b": {
-          "tools": true
-        },
-        "freehuntx/qwen3-coder:8b": {
+        "qwen2.5-coder:0.5b ": {
           "tools": true
         },
       }

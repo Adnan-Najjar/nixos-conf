@@ -19,7 +19,10 @@ in
   home = {
     packages =
       with pkgs;
-      [ gnome-screenshot ]
+      [
+        gnome-screenshot
+        gnome-tweaks
+      ]
       ++ (with gnomeExtensions; [
         arcmenu
         caffeine
@@ -44,7 +47,7 @@ in
     enable = true;
     entries = [
       "${pkgs.ghostty}/share/applications/com.mitchellh.ghostty.desktop"
-      "${inputs.zen-browser.packages.${pkgs.system}.default}/share/applications/zen-beta.desktop"
+      "${inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default}/share/applications/zen-beta.desktop"
     ];
   };
 }
