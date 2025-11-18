@@ -32,6 +32,9 @@
 
     # Virtualization support
     ../modules/virtualization.nix
+
+    # Custom
+    ../modules/nixec
   ];
 
   # System configuration

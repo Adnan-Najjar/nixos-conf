@@ -1,11 +1,10 @@
 {
   description = "Security tools development shell";
 
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-  };
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 
-  outputs = { self, nixpkgs }:
+  outputs =
+    { self, nixpkgs }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -13,7 +12,7 @@
         config.allowUnfree = true;
       };
 
-      nixpkgsSecurityTools =
+      packages =
         with pkgs;
         [
           # Networking
@@ -23,9 +22,6 @@
           netcat
           socat
           dnsenum
-
-          # Wireless
-          # aircrack-ng
 
           # Password cracking
           hashcat
@@ -45,20 +41,35 @@
           curl
           wget
         ]
-        # Scripting Tools
         ++ (with pkgs.python3Packages; [
           requests
           beautifulsoup4
           pwntools
         ]);
+
+      mkShellWithProxy =
+        name: proxy:
+        pkgs.mkShell {
+          inherit name;
+          inherit packages;
+          shellHook = ''
+            export http_proxy="${proxy}"
+            export https_proxy="${proxy}"
+            export HTTP_PROXY="${proxy}"
+            export HTTPS_PROXY="${proxy}"
+            export all_proxy="${proxy}"
+            exec zsh
+          '';
+        };
     in
     {
-      devShells.${system}.default = pkgs.mkShell {
-        name = "nixec";
-        packages = nixpkgsSecurityTools;
-        shellHook = ''
-          echo -e "\e[32m󰒃 Security Environment Ready, Using nixos-25.05\e[0m"
-        '';
+      devShells.${system} = {
+        default = mkShellWithProxy "nixec" "";
+
+        # Provide any proxy
+        proxy = mkShellWithProxy "nixec#proxy" "http://182.253.166.249:5678";
+
+        offline = mkShellWithProxy "nixec#offline" "http://127.0.0.1:1";
       };
     };
 }

@@ -11,6 +11,9 @@
     ../modules/services.nix
     ../modules/system.nix
     ../modules/programs.nix
+
+    # Custom
+    ../modules/nixec
   ];
 
   # System configuration
