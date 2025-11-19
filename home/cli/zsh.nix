@@ -35,7 +35,6 @@
         ll = "eza -l --icons=auto --total-size";
         lt = "eza --icons=auto --tree -I .git --group-directories-first";
         nrs = "sudo nixos-rebuild switch --flake /etc/nixos";
-        gemini = "GEMINI_API_KEY=$(pass api/gemini) gemini";
         open = "xdg-open";
       }
       (lib.mkIf isWSL {

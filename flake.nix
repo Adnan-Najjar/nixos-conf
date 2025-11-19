@@ -27,6 +27,7 @@
     let
       system = "x86_64-linux";
       user = {
+        hostname = "nixos";
         username = "adnan";
         fullName = "Adnan Najjar";
         email = "adnan.najjar1@gmail.com";

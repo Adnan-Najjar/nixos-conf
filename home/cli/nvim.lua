@@ -68,7 +68,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 -- Folding
--- Auto folding configuration for markdown / other languages
+-- Auto folding configuration
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",
 	callback = function()

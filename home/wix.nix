@@ -1,4 +1,4 @@
-{ config, user, isWSL, ... }:
+{ config, user, ... }:
 
 {
   imports = [

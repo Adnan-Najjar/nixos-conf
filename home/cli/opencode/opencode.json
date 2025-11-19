@@ -1,6 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "ollama/qwen3:0.6b",
   "username": "user",
   "provider": {
     "ollama": {
@@ -9,7 +8,7 @@
         "baseURL": "http://localhost:11434/v1"
       },
       "models": {
-        "qwen2.5-coder:0.5b ": {
+        "qwen2.5-coder:0.5b": {
           "tools": true
         },
       }

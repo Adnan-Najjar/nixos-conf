@@ -58,7 +58,8 @@
             export HTTP_PROXY="${proxy}"
             export HTTPS_PROXY="${proxy}"
             export all_proxy="${proxy}"
-            exec zsh
+
+            alias chrome="chromium --proxy-server=\"${proxy}\""
           '';
         };
     in

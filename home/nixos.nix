@@ -1,4 +1,4 @@
-{ config, user, isWSL, ... }:
+{ config, user, ... }:
 
 {
   imports = [
@@ -13,6 +13,7 @@
     ./gui/ghostty.nix
     ./gui/zen-browser.nix
     ./gui/discord.nix
+    ./gui/gopray.nix
     ./gui/gnome
   ];
 
