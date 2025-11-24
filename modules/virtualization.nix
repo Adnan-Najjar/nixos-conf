@@ -8,6 +8,7 @@
 {
   # Enable libvirt daemon
   virtualisation = {
+    docker.enable = true;
     spiceUSBRedirection.enable = true;
     libvirtd = {
       qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
