@@ -1,31 +1,34 @@
 ---@diagnostic disable: undefined-global
-vim.g.mapleader = " "
-vim.g.loaded_netrw = 1
+vim.g.mapleader          = " "
+vim.g.loaded_netrw       = 1
 vim.g.loaded_netrwPlugin = 1
-vim.g.have_nerd_font = true
-vim.opt.nu = true
-vim.opt.relativenumber = true
-vim.opt.smartindent = true
-vim.opt.wrap = false
-vim.opt.swapfile = false
-vim.opt.termguicolors = true
-vim.opt.clipboard = "unnamedplus"
-vim.opt.breakindent = true
-vim.opt.undofile = true
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.signcolumn = "yes"
-vim.opt.updatetime = 250
-vim.opt.inccommand = "split"
-vim.opt.winborder = "rounded"
-vim.opt.cursorline = true
-vim.opt.scrolloff = 10
-vim.opt.showtabline = 2
-vim.opt.showmode = false
-vim.opt.laststatus = 3
+vim.g.have_nerd_font     = true
+vim.opt.nu               = true
+vim.opt.relativenumber   = true
+vim.opt.smartindent      = true
+vim.opt.wrap             = false
+vim.opt.swapfile         = false
+vim.opt.termguicolors    = true
+vim.opt.breakindent      = true
+vim.opt.undofile         = true
+vim.opt.ignorecase       = true
+vim.opt.smartcase        = true
+vim.opt.signcolumn       = "yes"
+vim.opt.updatetime       = 250
+vim.opt.inccommand       = "split"
+vim.opt.winborder        = "rounded"
+vim.opt.cursorline       = true
+vim.opt.scrolloff        = 10
+vim.opt.showtabline      = 2
+vim.opt.showmode         = false
+vim.opt.laststatus       = 3
+vim.opt.foldenable       = true
+vim.opt.foldlevelstart   = 99
+vim.wo.foldmethod        = "expr"
+vim.wo.foldexpr          = "nvim_treesitter#foldexpr()"
 
 -- Tab management
-local tab_keybinds = {
+local tab_keybinds       = {
 	["<A-1>"] = ":tabnext 1<CR>",
 	["<A-2>"] = ":tabnext 2<CR>",
 	["<A-3>"] = ":tabnext 3<CR>",
@@ -45,7 +48,10 @@ vim.keymap.set("n", "<C-h>", "<c-w><c-h>")
 vim.keymap.set("n", "<C-l>", "<c-w><c-l>")
 vim.keymap.set("n", "<C-j>", "<c-w><c-j>")
 vim.keymap.set("n", "<C-k>", "<c-w><c-k>")
-vim.keymap.set("n", "<C-w>S", ":vert sball<cr>", { desc = "Split all buffers" })
+vim.keymap.set("n", "<C-w>s", ":sball<CR>", { desc = "Horizontal split all buffers" })
+vim.keymap.set("n", "<C-w>v", ":vert sball<CR>", { desc = "Vertical split all buffers" })
+vim.keymap.set("n", "<C-w>y", ":windo setlocal scrollbind! cursorbind!<CR>",
+	{ desc = "S[y]nc cursor and scroll of splits in a window" })
 
 -- Quality of Life
 vim.cmd([[
@@ -55,35 +61,14 @@ vim.cmd([[
 ]])
 vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv")
-vim.keymap.set({ "n", "v" }, "<leader>d", [[d]])
-vim.keymap.set({ "n", "v" }, "d", [["_d]])
-vim.keymap.set("x", "p", [["_dP]])
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
--- Highlight when copying text
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
 	callback = function()
 		vim.highlight.on_yank()
 	end,
+	desc = "Highlight when copying text"
 })
--- Folding
--- Auto folding configuration
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "*",
-	callback = function()
-		local parsers = require("nvim-treesitter.parsers")
-		if parsers.has_parser() then
-			vim.wo.foldmethod = "expr"
-			vim.wo.foldexpr   = "nvim_treesitter#foldexpr()"
-		else
-			vim.wo.foldmethod = "syntax"
-		end
-		vim.wo.foldlevel = 99
-		vim.wo.foldenable = true
-	end,
-})
-
 -- Gitsgins
 require('gitsigns').setup {
 	signs = {
@@ -98,6 +83,8 @@ require('gitsigns').setup {
 require("tokyonight").setup()
 vim.cmd.colorscheme("tokyonight-night")
 vim.cmd([[ highlight Normal ctermbg=none guibg=none ]])
+-- CSS Colors
+require('nvim-highlight-colors').setup({})
 -- Lualine
 require("lualine").setup()
 -- File explorer
@@ -152,7 +139,6 @@ require('snacks').setup {
 	image = { enabled = true },
 }
 -- Picker
-vim.keymap.set("n", "<leader><space>", function() Snacks.picker.zoxide({ layout = { preset = "vscode" } }) end)
 vim.keymap.set("n", "<leader>/", function() Snacks.picker.grep() end)
 vim.keymap.set("n", "<leader>b", function() Snacks.picker.buffers() end)
 -- All pickers
@@ -224,5 +210,3 @@ cmp.setup {
 -- LSP keymaps
 vim.keymap.set("n", "<leader>l", vim.lsp.buf.format)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
 
   services.ollama = {
@@ -16,5 +16,17 @@
   home.file = {
     "${config.home.homeDirectory}/.config/opencode/agent".source = ./agent;
     "${config.home.homeDirectory}/.config/opencode/opencode.json".source = ./opencode.json;
+  };
+
+  systemd.user.services.opencode-web = {
+    Unit = {
+      Description = "Start opencode web at startup";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+    Service = {
+      ExecStart = "${lib.getExe pkgs.opencode} serve --port 2077";
+    };
   };
 }

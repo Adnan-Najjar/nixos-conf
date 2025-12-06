@@ -36,6 +36,7 @@
         lt = "eza --icons=auto --tree -I .git --group-directories-first";
         nrs = "sudo nixos-rebuild switch --flake /etc/nixos";
         open = "xdg-open";
+        nix-search = "nix-search-tv print | fzf --preview 'nix-search-tv preview {}' --reverse --style full";
       }
       (lib.mkIf isWSL {
         pst = lib.mkForce "win32yank.exe -o";
@@ -77,6 +78,5 @@
       fi
     '';
   };
-
 }
 

@@ -31,6 +31,7 @@
       enableZshIntegration = true;
       nix-direnv.enable = true;
     };
+    nix-search-tv.enable = true;
     tmux = {
       enable = true;
       prefix = "C-s";
@@ -44,6 +45,10 @@
         set -g base-index 1
         setw -g pane-base-index 1
         set-option -g renumber-windows on
+        bind h select-pane -L
+        bind j select-pane -D
+        bind k select-pane -U
+        bind l select-pane -R
 
         set -g status-style fg=#62a0ea 
         set -g status-left "#[fg=#ffbe6f,bold] #S "

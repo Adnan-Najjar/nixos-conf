@@ -11,11 +11,8 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     papirus-icon-theme
-    tesseract
-    wl-clipboard
     chromium
     onlyoffice-desktopeditors
-    libnotify
   ];
 
   fonts = {

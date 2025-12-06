@@ -51,6 +51,7 @@
       gitsigns-nvim
       vim-sleuth
       tokyonight-nvim
+      nvim-highlight-colors
       lualine-nvim
       mini-files
       snacks-nvim

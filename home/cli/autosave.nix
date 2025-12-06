@@ -1,4 +1,7 @@
-{ pkgs, user, ... }:
+{ pkgs, lib, ... }:
+let
+  git = lib.getExe pkgs.git;
+in
 {
   systemd.user.timers."autosave" = {
     Unit = {
@@ -23,11 +26,11 @@
         set -eu
         cd $HOME/Documents
 
-        ${pkgs.git}/bin/git pull --rebase || true
-        ${pkgs.git}/bin/git add .
-        ${pkgs.git}/bin/git diff --quiet --cached && exit 0
-        ${pkgs.git}/bin/git commit -m "Autosave: $(date)"
-        ${pkgs.git}/bin/git push || true
+        ${git} pull --rebase || true
+        ${git} add .
+        ${git} diff --quiet --cached && exit 0
+        ${git} commit -m "Autosave: $(date)"
+        ${git} push || true
       '';
     };
   };

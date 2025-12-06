@@ -40,6 +40,8 @@
           # Utility
           curl
           wget
+
+          openvpn
         ]
         ++ (with pkgs.python3Packages; [
           requests

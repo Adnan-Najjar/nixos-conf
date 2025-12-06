@@ -2,6 +2,9 @@
 
 {
   home.packages = with pkgs; [
+    tesseract
+    wl-clipboard
+    libnotify
     man-pages
     man-pages-posix
     file

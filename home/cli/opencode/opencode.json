@@ -8,7 +8,7 @@
         "baseURL": "http://localhost:11434/v1"
       },
       "models": {
-        "qwen2.5-coder:0.5b": {
+        "qwen3:1.7b": {
           "tools": true
         },
       }

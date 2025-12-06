@@ -25,7 +25,7 @@
 
   # Add user to the libvirtd group
   users.users.${user.username} = {
-    extraGroups = [ "libvirtd" ];
+    extraGroups = [ "libvirtd" "docker" ];
   };
 
   # Enable UEFI firmware support
