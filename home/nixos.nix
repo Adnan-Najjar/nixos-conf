@@ -10,6 +10,7 @@
     ./cli/autosave.nix
     ./cli/opencode
     ./gui/packages.nix
+    ./gui/services.nix
     ./gui/ghostty.nix
     ./gui/zen-browser.nix
     ./gui/discord.nix
