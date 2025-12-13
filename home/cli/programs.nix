@@ -61,6 +61,7 @@
         bind-key a display-popup -E -w 50% -h 40% -x C -y C "${./tmux-sessionizer.sh}"
       '';
     };
+    taskwarrior.enable = true;
 
     # Git and Github CLI
     git = {
@@ -72,7 +73,6 @@
         };
         alias = {
           pl = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
-          ol = "log --oneline --graph --decorate";
         };
         init.defaultBranch = "main";
         color.ui = true;
@@ -81,7 +81,7 @@
       };
       ignores = [
         "AGENTS.md"
-        ".env"
+        ".*env*"
         "*.log"
       ];
     };

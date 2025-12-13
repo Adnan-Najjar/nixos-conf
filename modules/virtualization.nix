@@ -1,6 +1,5 @@
 {
-  config,
-  pkgs,
+  pkgs-stable,
   user,
   ...
 }:
@@ -11,10 +10,10 @@
     docker.enable = true;
     spiceUSBRedirection.enable = true;
     libvirtd = {
-      qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
+      qemu.vhostUserPackages = with pkgs-stable; [ virtiofsd ];
       enable = true;
       qemu = {
-        package = pkgs.qemu_kvm;
+        package = pkgs-stable.qemu_kvm;
         runAsRoot = true;
         swtpm.enable = true;
       };
@@ -25,11 +24,14 @@
 
   # Add user to the libvirtd group
   users.users.${user.username} = {
-    extraGroups = [ "libvirtd" "docker" ];
+    extraGroups = [
+      "libvirtd"
+      "docker"
+    ];
   };
 
   # Enable UEFI firmware support
   systemd.tmpfiles.rules = [
-    "L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware"
+    "L+ /var/lib/qemu/firmware - - - - ${pkgs-stable.qemu}/share/qemu/firmware"
   ];
 }

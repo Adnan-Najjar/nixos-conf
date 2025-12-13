@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs-stable, ... }:
 
 {
   # General desktop configuration
@@ -9,10 +9,9 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs-stable; [
     papirus-icon-theme
     chromium
-    onlyoffice-desktopeditors
   ];
 
   fonts = {
@@ -21,6 +20,6 @@
         monospace = [ "CaskaydiaCove Nerd Font" ];
       };
     };
-    packages = [ pkgs.nerd-fonts.caskaydia-cove ];
+    packages = [ pkgs-stable.nerd-fonts.caskaydia-cove ];
   };
 }

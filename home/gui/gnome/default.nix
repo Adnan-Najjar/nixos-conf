@@ -2,12 +2,13 @@
   config,
   inputs,
   pkgs,
+  pkgs-stable,
   lib,
   ...
 }:
 
 let
-  theme = pkgs.sweet;
+  theme = pkgs-stable.sweet;
   themeName = "Sweet-Ambar-Blue-Dark-v40";
 in
 {
@@ -18,7 +19,7 @@ in
 
   home = {
     packages =
-      with pkgs;
+      with pkgs-stable;
       [
         gnome-screenshot
         gnome-tweaks
@@ -47,7 +48,9 @@ in
     enable = true;
     entries = [
       "${pkgs.ghostty}/share/applications/com.mitchellh.ghostty.desktop"
-      "${inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default}/share/applications/zen-beta.desktop"
+      "${
+        inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+      }/share/applications/zen-beta.desktop"
     ];
   };
 }

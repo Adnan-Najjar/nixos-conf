@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs-stable, ... }:
 
 {
   # Bootloader
@@ -9,7 +9,7 @@
     plymouth = {
       enable = true;
       theme = "glitch";
-      themePackages = with pkgs; [
+      themePackages = with pkgs-stable; [
         # By default we would install all themes
         (adi1090x-plymouth-themes.override {
           selected_themes = [ "glitch" ];

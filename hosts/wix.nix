@@ -1,4 +1,4 @@
-{ config, pkgs, user, inputs, ... }:
+{ config, pkgs, pkgs-stable, user, inputs, ... }:
 
 {
   imports = [
@@ -26,7 +26,7 @@
     useUserPackages = true;
     backupFileExtension = "backup";
     extraSpecialArgs = {
-      inherit user inputs;
+      inherit user inputs pkgs-stable;
       isWSL = true;
     };
     users.${user.username}.imports = [ ../home/wix.nix ];

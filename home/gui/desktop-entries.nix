@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ ... }:
 
 {
   # Excalidraw
@@ -6,7 +6,7 @@
     name = "Excalidraw";
     genericName = "Virtual whiteboard for sketching hand-drawn like diagrams";
     categories = [ "Graphics" ];
-    exec = "chromium --app=https://excalidraw.com";
+    exec = "chromium --window-size=1300,1000 --app=https://excalidraw.com";
     icon = "excalidraw";
   };
 
@@ -15,7 +15,7 @@
     name = "Stirling PDF";
     genericName = "Launch StirlingPDF and open its WebGUI";
     categories = [ "Office" ];
-    exec = "chromium --app=http://localhost:2020";
+    exec = "chromium --window-size=1300,1000 --app=http://localhost:2020";
     icon = "stirling-pdf";
   };
 }

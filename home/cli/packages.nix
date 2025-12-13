@@ -12,10 +12,6 @@
     p7zip
     ripgrep
     fd
-    android-tools
-    imagemagick
-    ghostscript_headless # PDF
-    python313Packages.markitdown # MD
     ffmpeg
     jq
     htmlq
@@ -24,6 +20,9 @@
     eza
     tldr
     trash-cli
-    fahclient
+
+    android-tools
+    imagemagick
+    python313Packages.markitdown # MD
   ];
 }

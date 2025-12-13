@@ -178,12 +178,7 @@ require("nvim-treesitter.configs").setup {
 	indent = { enable = true },
 }
 -- LSP completion setup
-vim.lsp.enable('lua_ls')
-vim.lsp.enable('gopls')
-vim.lsp.enable('pyright')
 vim.lsp.enable('nil_ls')
-vim.lsp.enable('tsserver')
-vim.lsp.enable('eslint')
 
 local cmp = require('cmp')
 local luasnip = require('luasnip')

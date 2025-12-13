@@ -2,6 +2,7 @@
   description = "Personal NixOS configuration";
 
   inputs = {
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
@@ -22,6 +23,7 @@
       nixos-wsl,
       home-manager,
       zen-browser,
+      nixpkgs-stable,
       ...
     }@inputs:
     let
@@ -32,6 +34,7 @@
         fullName = "Adnan Najjar";
         email = "adnan.najjar1@gmail.com";
       };
+      pkgs-stable = nixpkgs-stable.legacyPackages.${system};
 
     in
     {
@@ -40,7 +43,7 @@
         # NixOS
         nixos = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit user inputs; };
+          specialArgs = { inherit user inputs pkgs-stable; };
           modules = [
             ./hosts/nixos.nix
           ];
@@ -49,7 +52,7 @@
         # Windows WSL
         wix = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit user inputs; };
+          specialArgs = { inherit user inputs pkgs-stable; };
           modules = [
             ./hosts/wix.nix
           ];
