@@ -1,8 +1,12 @@
-{ ... }:
+{ lib, ... }:
 
 {
   # List services that you want to enable:
-  # services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    openFirewall = false; # don't open firewall port
+  };
+
   services.tailscale = {
     enable = true;
     extraSetFlags = [ "--netfilter-mode=nodivert" ];
@@ -17,4 +21,5 @@
       SERVER_PORT = 2020;
     };
   };
+  systemd.services.stirling-pdf.wantedBy = lib.mkForce [];
 }

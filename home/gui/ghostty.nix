@@ -7,7 +7,8 @@
       font-family = "CaskaydiaMono Nerd Font";
       font-size = 15;
       mouse-hide-while-typing = true;
-      background-blur-radius = 20;
+      window-decoration = "none";
+      background-blur = true;
       background-opacity = 0.9;
       maximize = true;
       keybind = [

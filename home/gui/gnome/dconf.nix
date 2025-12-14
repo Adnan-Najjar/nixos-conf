@@ -9,18 +9,6 @@ with lib.hm.gvariant;
       dynamic-workspaces = false;
     };
 
-    # Screen blanks after 15 minutes
-    "org/gnome/desktop/session" = {
-      idle-delay = lib.hm.gvariant.mkUint32 900;
-    };
-    # Suspend after 15 minutes
-    "org/gnome/settings-daemon/plugins/power" = {
-      sleep-inactive-ac-type = "suspend";
-      sleep-inactive-ac-timeout = 900;
-      sleep-inactive-battery-type = "suspend";
-      sleep-inactive-battery-timeout = 900;
-    };
-
     "org/gnome/desktop/input-sources" = {
       sources = [
         (mkTuple [
@@ -160,6 +148,12 @@ with lib.hm.gvariant;
 
     "org/gnome/desktop/sound" = {
       event-sounds = false;
+    };
+
+    "org/gnome/shell/extensions/blur-my-shell/applications" = {
+      blue = true;
+      enable-all = true;
+      opacity = 242;
     };
 
     "org/gnome/shell/extensions/dash-in-panel" = {
