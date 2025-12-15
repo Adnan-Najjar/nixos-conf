@@ -21,7 +21,6 @@ in
     packages =
       with pkgs-stable;
       [
-        gnome-screenshot
         gnome-tweaks
       ]
       ++ (with gnomeExtensions; [

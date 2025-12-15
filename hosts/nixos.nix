@@ -1,6 +1,5 @@
 {
-  config,
-  pkgs,
+  lib,
   pkgs-stable,
   user,
   inputs,
@@ -60,5 +59,17 @@
       isWSL = false;
     };
     users.${user.username}.imports = [ ../home/nixos.nix ];
+  };
+
+  # Server specialisation
+  specialisation = {
+    server = {
+      inheritParentConfig = true;
+      configuration = {
+        # Disable GUI components
+        services.displayManager.gdm.enable = lib.mkForce false;
+        services.desktopManager.gnome.enable = lib.mkForce false;
+      };
+    };
   };
 }

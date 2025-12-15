@@ -97,7 +97,7 @@ with lib.hm.gvariant;
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
       binding = "<Shift><Super>e";
-      command = ''bash -c "gnome-screenshot -a -f /tmp/screenshot.png && tesseract /tmp/screenshot.png - | wl-copy"'';
+      command = ''bash -c "tesseract /tmp/screenshot.png - | wl-copy"'';
       name = "Extract Image from Text";
     };
 
