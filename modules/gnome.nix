@@ -1,4 +1,4 @@
-{ pkgs-stable, ... }:
+{ pkgs, ... }:
 
 {
   # Enable GDM and add wallpaper
@@ -26,7 +26,7 @@
   # Enable the GNOME Desktop Environment.
   services.desktopManager.gnome.enable = true;
   environment.gnome.excludePackages = (
-    with pkgs-stable;
+    with pkgs;
     [
       cheese # Webcam app
       snapshot # Camera app

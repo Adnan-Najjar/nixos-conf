@@ -31,7 +31,10 @@
           metasploit
 
           # Reverse Engineering
+          detect-it-easy
           radare2
+          binaryninja-free
+          ghidra-bin
 
           # Forensics
           binwalk
@@ -41,6 +44,7 @@
           curl
           wget
 
+          # VPN for HTB
           openvpn
         ]
         ++ (with pkgs.python3Packages; [

@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    gradia
     easyeffects
     marktext
     libreoffice

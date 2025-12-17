@@ -1,14 +1,14 @@
 {
   config,
   inputs,
+  pkgs-unstable,
   pkgs,
-  pkgs-stable,
   lib,
   ...
 }:
 
 let
-  theme = pkgs-stable.sweet;
+  theme = pkgs.sweet;
   themeName = "Sweet-Ambar-Blue-Dark-v40";
 in
 {
@@ -19,7 +19,7 @@ in
 
   home = {
     packages =
-      with pkgs-stable;
+      with pkgs;
       [
         gnome-tweaks
       ]
@@ -46,9 +46,9 @@ in
   xdg.autostart = {
     enable = true;
     entries = [
-      "${pkgs.ghostty}/share/applications/com.mitchellh.ghostty.desktop"
+      "${pkgs-unstable.ghostty}/share/applications/com.mitchellh.ghostty.desktop"
       "${
-        inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+        inputs.zen-browser.packages.${pkgs-unstable.stdenv.hostPlatform.system}.default
       }/share/applications/zen-beta.desktop"
     ];
   };

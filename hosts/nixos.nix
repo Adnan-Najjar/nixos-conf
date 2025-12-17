@@ -1,6 +1,8 @@
 {
   lib,
-  pkgs-stable,
+  pkgs,
+  pkgs-unstable,
+
   user,
   inputs,
   ...
@@ -43,7 +45,7 @@
     steam.enable = true;
     kdeconnect = {
       enable = true;
-      package = pkgs-stable.gnomeExtensions.gsconnect;
+      package = pkgs-unstable.gnomeExtensions.gsconnect;
     };
   };
 
@@ -55,7 +57,12 @@
     useUserPackages = true;
     backupFileExtension = "backup";
     extraSpecialArgs = {
-      inherit user inputs pkgs-stable;
+      inherit
+        user
+        inputs
+        pkgs
+        pkgs-unstable
+        ;
       isWSL = false;
     };
     users.${user.username}.imports = [ ../home/nixos.nix ];

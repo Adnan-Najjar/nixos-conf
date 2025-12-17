@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ pkgs-unstable, ... }:
 {
 
   home.packages = (
-    with pkgs;
+    with pkgs-unstable;
     [
       # Nix
       nil
@@ -19,7 +19,7 @@
     viAlias = true;
     vimAlias = true;
     defaultEditor = true;
-    plugins = with pkgs.vimPlugins; [
+    plugins = with pkgs-unstable.vimPlugins; [
       nvim-cmp
       cmp-nvim-lsp
       cmp-buffer

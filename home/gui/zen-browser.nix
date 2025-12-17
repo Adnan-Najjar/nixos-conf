@@ -1,6 +1,6 @@
 {
   inputs,
-  pkgs,
+  pkgs-unstable,
   user,
   ...
 }:
@@ -8,7 +8,7 @@
   imports = [ inputs.zen-browser.homeModules.default ];
   programs.zen-browser = {
     enable = true;
-    nativeMessagingHosts = [ pkgs.passff-host ];
+    nativeMessagingHosts = [ pkgs-unstable.passff-host ];
     profiles.${user.username} = {
       id = 0;
       name = "${user.username}";

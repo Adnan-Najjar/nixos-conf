@@ -96,9 +96,9 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
-      binding = "<Shift><Super>e";
-      command = ''bash -c "tesseract /tmp/screenshot.png - | wl-copy"'';
-      name = "Extract Image from Text";
+      binding = "<Shift><Super>s";
+      command = ''gradia --screenshot=INTERACTIVE'';
+      name = "Take screenshot with gradia";
     };
 
     "org/gnome/shell" = {
@@ -132,7 +132,6 @@ with lib.hm.gvariant;
     "org/gnome/shell/keybindings" = {
       screenshot = [ "Print" ];
       show-screen-recording-ui = [ "<Shift><Super>r" ];
-      show-screenshot-ui = [ "<Shift><Super>s" ];
       switch-to-application-1 = [ ];
       switch-to-application-2 = [ ];
       switch-to-application-3 = [ ];
@@ -190,17 +189,17 @@ with lib.hm.gvariant;
       disable-down-arrow = true;
       display-mode = 0;
       enable-keybindings = true;
-      history-size = 9999;
+      history-size = 100;
       move-item-first = true;
-      next-entry = [ "<Super>v" ];
+      next-entry = [ "<Super>n" ];
       notify-on-cycle = true;
       paste-button = false;
       paste-on-select = true;
       pinned-on-bottom = true;
-      prev-entry = [ "<Shift><Super>v" ];
+      prev-entry = [ "<Super>p" ];
       private-mode-binding = [ ];
       strip-text = true;
-      toggle-menu = [ ];
+      toggle-menu = [ "<Super>v" ];
     };
 
     "org/gnome/shell/extensions/auto-move-windows" = {

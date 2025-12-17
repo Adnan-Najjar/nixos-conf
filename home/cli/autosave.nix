@@ -1,6 +1,6 @@
-{ pkgs, lib, ... }:
+{ pkgs-unstable, lib, ... }:
 let
-  git = lib.getExe pkgs.git;
+  git = lib.getExe pkgs-unstable.git;
 in
 {
   systemd.user.timers."autosave" = {
@@ -22,7 +22,7 @@ in
     };
     Service = {
       Type = "oneshot";
-      ExecStart = pkgs.writeShellScript "autosave" ''
+      ExecStart = pkgs-unstable.writeShellScript "autosave" ''
         set -eu
         cd $HOME/Documents
 

@@ -9,5 +9,6 @@
       "wheel"
     ];
     shell = pkgs.zsh;
+    initialPassword = "password";
   };
 }

@@ -1,8 +1,8 @@
-{ pkgs, user, ... }:
+{ pkgs-unstable, user, ... }:
 
 {
   home.sessionVariables = {
-    SHELL = "${pkgs.zsh}/bin/zsh";
+    SHELL = "${pkgs-unstable.zsh}/bin/zsh";
     PATH = "$PATH:$GOPATH/bin:$HOME/.local/bin";
     GOPATH = "$HOME/.go";
     MANPATH = "/usr/share/man:/usr/local/share/man:$MANPATH";

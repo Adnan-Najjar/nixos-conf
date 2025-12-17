@@ -1,9 +1,15 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs-unstable,
+  
+  lib,
+  ...
+}:
 {
 
   services.ollama = {
     enable = true;
-    package = pkgs.ollama-cuda;
+    package = pkgs-unstable.ollama-cuda;
     acceleration = "cuda";
     # if ollama not using GPU run:
     # sudo modprobe --remove nvidia-uvm
@@ -11,7 +17,10 @@
   };
 
   # Run opencode with ollama
-  programs.opencode.enable = true;
+  programs.opencode = {
+    enable = true;
+    package = pkgs-unstable.opencode;
+  };
 
   home.file = {
     "${config.home.homeDirectory}/.config/opencode/agent".source = ./agent;
@@ -26,7 +35,7 @@
       WantedBy = [ "default.target" ];
     };
     Service = {
-      ExecStart = "${lib.getExe pkgs.opencode} serve --port 2077";
+      ExecStart = "${lib.getExe pkgs-unstable.opencode} serve --port 2077";
     };
   };
 }
