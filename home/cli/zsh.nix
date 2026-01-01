@@ -61,10 +61,35 @@
       bindkey '^[[1;5C' forward-word                    # ctrl + ->
       bindkey '^[[1;5D' backward-word                   # ctrl + <-
 
+      bindkey -s '^Xo' 'open .\n'
+      bindkey -s '^Xgh' 'gh browse\n'
+      bindkey -s '^Xgc' 'git commit -m ""\C-b'
+      bindkey -s '^Xgp' 'git push '
+      bindkey -s '^Xgs' 'git status\n'
+      bindkey -s '^Xgl' 'git pl -n 10\n'
+
       # Open command in editor
       autoload -U edit-command-line
       zle -N edit-command-line
-      bindkey '^X' edit-command-line                    # ctrl + x
+      bindkey '^Xe' edit-command-line
+
+      autoload -Uz add-zsh-hook
+
+      function auto_ls() {
+        eza --icons=auto
+      }
+
+      add-zsh-hook chpwd auto_ls
+
+      function copy-buffer-to-clipboard() {
+        echo -n "$BUFFER" | wl-copy
+        zle -M "Copied to clipboard"
+      }
+      zle -N copy-buffer-to-clipboard
+      bindkey '^Xc' copy-buffer-to-clipboard
+
+      # Redirect stderr to /dev/null
+      alias -g N='2>/dev/null'
 
       # Override -h and --help with bat
       alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
@@ -79,4 +104,3 @@
     '';
   };
 }
-

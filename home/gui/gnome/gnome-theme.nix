@@ -1,8 +1,4 @@
-{
-  theme,
-  themeName,
-  ...
-}:
+{ theme, themeName, ... }:
 
 {
   gtk = {

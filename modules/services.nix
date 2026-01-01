@@ -21,5 +21,5 @@
       SERVER_PORT = 2020;
     };
   };
-  systemd.services.stirling-pdf.wantedBy = lib.mkForce [];
+  systemd.services.stirling-pdf.wantedBy = lib.mkForce [ ];
 }

@@ -16,7 +16,5 @@ let
   });
 in
 {
-  home.packages = [
-    myDiscord
-  ];
+  home.packages = [ myDiscord ];
 }

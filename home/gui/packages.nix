@@ -7,5 +7,7 @@
     marktext
     libreoffice
     poppler-utils
+
+    heroic
   ];
 }

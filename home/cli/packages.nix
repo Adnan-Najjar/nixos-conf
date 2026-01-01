@@ -2,11 +2,16 @@
 
 {
   home.packages = with pkgs; [
+    # Nix
+    nil
+    nixfmt-classic
+
     tesseract
     wl-clipboard
     libnotify
     man-pages
     man-pages-posix
+    unixtools.xxd
     file
     unzip
     p7zip

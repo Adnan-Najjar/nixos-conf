@@ -97,7 +97,7 @@ with lib.hm.gvariant;
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
       binding = "<Shift><Super>s";
-      command = ''gradia --screenshot=INTERACTIVE'';
+      command = "gradia --screenshot=INTERACTIVE";
       name = "Take screenshot with gradia";
     };
 
@@ -110,7 +110,6 @@ with lib.hm.gvariant;
         "clipboard-indicator@tudmotu.com"
         "caffeine@patapon.info"
         "blur-my-shell@aunetx"
-        "wifiqrcode@glerro.pm.me"
         "auto-move-windows@gnome-shell-extensions.gcampax.github.com"
         "gsconnect@andyholmes.github.io"
       ];

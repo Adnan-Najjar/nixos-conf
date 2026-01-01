@@ -20,9 +20,7 @@ in
   home = {
     packages =
       with pkgs;
-      [
-        gnome-tweaks
-      ]
+      [ gnome-tweaks ]
       ++ (with gnomeExtensions; [
         arcmenu
         caffeine
@@ -31,7 +29,6 @@ in
         clipboard-indicator
         appindicator
         user-themes
-        wifi-qrcode
         auto-move-windows
       ]);
 

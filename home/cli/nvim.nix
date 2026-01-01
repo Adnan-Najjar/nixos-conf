@@ -1,19 +1,6 @@
 { pkgs-unstable, ... }:
 {
 
-  home.packages = (
-    with pkgs-unstable;
-    [
-      # Nix
-      nil
-      nixfmt-classic
-      # Lua
-      stylua
-      # Binary
-      unixtools.xxd
-    ]
-  );
-
   programs.neovim = {
     enable = true;
     viAlias = true;

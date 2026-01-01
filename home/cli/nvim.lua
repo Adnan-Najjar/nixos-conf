@@ -178,7 +178,8 @@ require("nvim-treesitter.configs").setup {
 	indent = { enable = true },
 }
 -- LSP completion setup
-vim.lsp.enable('nil_ls')
+vim.lsp.enable("nil_ls")
+vim.lsp.enable(vim.env.LSP)
 
 local cmp = require('cmp')
 local luasnip = require('luasnip')
@@ -203,5 +204,14 @@ cmp.setup {
 	})
 }
 -- LSP keymaps
-vim.keymap.set("n", "<leader>l", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>l", function() 
+    local formater = vim.env.FORMATER
+    if formater then
+        local view = vim.fn.winsaveview()
+        vim.cmd("silent !" .. formater .. " %")
+        vim.fn.winrestview(view)
+    else
+        vim.lsp.buf.format({ async = true })
+    end
+end)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
