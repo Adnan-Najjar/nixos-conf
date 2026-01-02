@@ -97,6 +97,7 @@
         }
       ];
     };
-    password-store.enable = true;
+    # bash one liner to export password-store passwords to a passwords.csv file
+    # echo "url,password,username" > ~/Downloads/passwords.csv && find ~/.local/share/password-store/ -type f -name "*.gpg" | xargs -n1 -I{} bash -c 'echo "$(basename {} | sed "s/.gpg$//"),$(gpg --decrypt {} | sed -z "s/\nlogin: /,/")"' >> ~/Downloads/passwords.csv
   };
 }

@@ -87,18 +87,13 @@ with lib.hm.gvariant;
       www = [ "<Super>b" ];
       mic-mute = [ "KP_Subtract" ];
       volume-mute = [ "KP_Add" ];
+      show-screenshot-ui = [ "<Shift><Super>s" ];
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
       binding = "<Super>Return";
       command = "ghostty";
       name = "Terminal";
-    };
-
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
-      binding = "<Shift><Super>s";
-      command = "gradia --screenshot=INTERACTIVE";
-      name = "Take screenshot with gradia";
     };
 
     "org/gnome/shell" = {

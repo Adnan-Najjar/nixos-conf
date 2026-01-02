@@ -179,7 +179,9 @@ require("nvim-treesitter.configs").setup {
 }
 -- LSP completion setup
 vim.lsp.enable("nil_ls")
-vim.lsp.enable(vim.env.LSP)
+if vim.env.LSP then
+	vim.lsp.enable(vim.env.LSP)
+end
 
 local cmp = require('cmp')
 local luasnip = require('luasnip')

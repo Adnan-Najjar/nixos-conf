@@ -29,5 +29,7 @@
     android-tools
     imagemagick
     python313Packages.markitdown # MD
+
+    bitwarden-cli
   ];
 }

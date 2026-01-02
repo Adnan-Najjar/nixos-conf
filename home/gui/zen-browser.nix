@@ -1,6 +1,5 @@
 {
   inputs,
-  pkgs-unstable,
   user,
   ...
 }:
@@ -8,7 +7,6 @@
   imports = [ inputs.zen-browser.homeModules.default ];
   programs.zen-browser = {
     enable = true;
-    nativeMessagingHosts = [ pkgs-unstable.passff-host ];
     profiles.${user.username} = {
       id = 0;
       name = "${user.username}";
@@ -35,7 +33,7 @@
           };
           "bing".metaData.hidden = true;
           "google".metaData.hidden = true;
-          "ddg".metaData.hidden = true;
+          "perplexity".metaData.hidden = true;
           "wikipedia".metaData.hidden = true;
         };
       };
@@ -78,7 +76,7 @@
           (extension "haramblur" "info@haramblur.com")
           (extension "simple-translate" "simple-translate@sienori")
           (extension "proton-vpn-firefox-extension" "vpn@proton.ch")
-          (extension "passff" "passff@invicem.pro")
+          (extension "bitwarden-password-manager" "{446900e4-71c2-419f-a6a7-df9c091e268b}")
         ];
     };
   };
